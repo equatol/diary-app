@@ -1,0 +1,483 @@
+body {
+  background: linear-gradient(135deg, #ffe3ec, #ffeef5);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(160deg, #ffffff, #fff5f8);
+  border: 3px solid #ffffff;
+  border-radius: 32px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow:
+    0 10px 0 rgba(255, 143, 171, 0.35),
+    0 16px 28px rgba(255, 143, 171, 0.3);
+}
+
+#menu-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #ff8fab;
+  font-size: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#menu-button:hover {
+  background: #ffeef5;
+}
+
+.month-menu {
+  display: none;
+  position: absolute;
+  top: 56px;
+  left: 16px;
+  min-width: 140px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(255, 143, 171, 0.3);
+  z-index: 10;
+}
+
+.month-menu.open {
+  display: block;
+}
+
+.month-menu li {
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.month-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.month-menu li:hover {
+  background: #ffeef5;
+}
+
+.month-menu li.active {
+  background: #ff8fab;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
+
+.mascot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+  margin-bottom: -8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mascot svg {
+  display: block;
+  animation: mascot-idle 2.6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.mascot.bounce svg {
+  animation: mascot-bounce 0.6s ease;
+}
+
+.mascot.blink .eyes {
+  animation: mascot-blink 0.3s ease;
+  transform-origin: center;
+}
+
+.mascot.bounce .wing-left {
+  animation: mascot-wing-left 0.6s ease;
+  transform-origin: 40px 65px;
+}
+
+.mascot.bounce .wing-right {
+  animation: mascot-wing-right 0.6s ease;
+  transform-origin: 80px 65px;
+}
+
+.mascot-sparkle {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  font-size: 20px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mascot.bounce .mascot-sparkle::before {
+  content: "✨";
+  animation: mascot-sparkle 0.6s ease;
+}
+
+@keyframes mascot-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+@keyframes mascot-bounce {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-20px) rotate(-8deg);
+  }
+  55% {
+    transform: translateY(0) rotate(6deg);
+  }
+  75% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes mascot-blink {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes mascot-wing-left {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+
+@keyframes mascot-wing-right {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes mascot-sparkle {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-26px) scale(0.9);
+  }
+}
+
+h1 {
+  color: #ff8fab;
+  text-align: center;
+  margin-top: 8px;
+}
+
+h2 {
+  color: #d97fab;
+  font-size: 18px;
+  margin-top: 32px;
+}
+
+.date-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.date-label {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 40%),
+    #ffffff;
+  border: 2px solid #ffc2d1;
+  border-radius: 18px;
+  padding: 8px 10px;
+  font-size: 15px;
+  color: #3a3a3a;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #ffd6e3;
+}
+
+.date-input-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  border: 2px solid #ffc2d1;
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #ff8fab;
+}
+
+button {
+  display: block;
+  margin: 16px auto 0;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 45%),
+    linear-gradient(180deg, #ffb3c6, #ff8fab);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: 10px 28px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 #d6597e,
+    0 6px 10px rgba(255, 143, 171, 0.4);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 #d6597e,
+    0 2px 4px rgba(255, 143, 171, 0.4);
+}
+
+.day-group {
+  margin-bottom: 16px;
+}
+
+.day-group h3 {
+  color: #ff8fab;
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background:
+    radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 40%),
+    #ffeef5;
+  border: 2px solid #ffffff;
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  box-shadow:
+    0 3px 0 #ffc9dc,
+    0 4px 8px rgba(255, 143, 171, 0.2);
+}
+
+.entry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.entry-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: #b0b0b0;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.delete-button.confirming {
+  background: #ffd6d6;
+  color: #e05a5a;
+}
+
+@media (hover: hover) {
+  .delete-button:hover {
+    background: #ffd6d6;
+    color: #e05a5a;
+  }
+}
+
+#settings-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #ff8fab;
+  font-size: 26px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#settings-button:hover {
+  background: #ffeef5;
+}
+
+.settings-panel {
+  display: none;
+  background: #ffeef5;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.settings-panel.open {
+  display: block;
+}
+
+.settings-panel h2 {
+  margin-top: 0;
+}
+
+.settings-note {
+  font-size: 13px;
+  color: #555;
+  margin-top: 0;
+}
+
+.settings-panel label {
+  display: block;
+  font-size: 13px;
+  color: #d97fab;
+  margin-top: 10px;
+}
+
+.settings-panel input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ffc2d1;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 16px; /* 16px 未満だと iPhone で入力時に画面が拡大されてしまう */
+  outline: none;
+}
+
+.settings-panel input:focus {
+  border-color: #ff8fab;
+}
+
+.sub-button {
+  background: transparent;
+  color: #e05a5a;
+  font-size: 13px;
+  border: none;
+  box-shadow: none;
+}
+
+.sub-button:hover {
+  background: #ffd6d6;
+}
+
+.status-text {
+  min-height: 1.2em;
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #d97fab;
+  text-align: center;
+}
+
+.status-text.error {
+  color: #e05a5a;
+}
+
+button:disabled {
+  background: #f3c4d2;
+  cursor: wait;
+}
+
+.version {
+  margin: 24px 0 0;
+  font-size: 11px;
+  color: #b0b0b0;
+  text-align: center;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日記アプリ</title>
+  <!-- Content-Security-Policy: 読み込み先を自分のサイトだけに、通信先を GitHub の窓口だけに限定する。
+       万一ページに細工されても、合鍵や日記をよそへ送れないようにするため -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#dbefff">
+  <!-- ホーム画面に追加したときの設定（iPhone向け） -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="日記">
+  <!-- ?v=番号: 更新したとき Safari が古いファイルを使い続けないようにする印 -->
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <div class="container">
+    <button id="menu-button" aria-label="メニュー">&#9776;</button>
+    <div id="month-menu" class="month-menu"></div>
+    <button id="settings-button" aria-label="GitHubの設定">&#9881;</button>
+
+    <h1>日記アプリ</h1>
+
+    <div id="settings-panel" class="settings-panel">
+      <h2>GitHub の設定</h2>
+      <p class="settings-note">日記は GitHub の<strong>非公開</strong>リポジトリに保存されます。公開リポジトリには保存しません。</p>
+      <label for="setting-owner">ユーザー名</label>
+      <input type="text" id="setting-owner" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <label for="setting-repo">リポジトリ名</label>
+      <input type="text" id="setting-repo" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <label for="setting-token">合鍵（トークン）</label>
+      <input type="password" id="setting-token" autocomplete="off" placeholder="github_pat_ で始まる合鍵を貼り付け">
+      <button id="connect-button">接続する</button>
+      <button id="disconnect-button" class="sub-button">この端末から合鍵を消す</button>
+    </div>
+
+    <p id="status-text" class="status-text" role="status"></p>
+
+    <div class="date-wrapper">
+      <label for="entry-date" id="date-label" class="date-label"></label>
+      <input type="date" id="entry-date" class="date-input-overlay">
+    </div>
+    <textarea id="entry-input" placeholder="今日の出来事を書いてみましょう"></textarea>
+    <button id="save-button">保存する</button>
+    <button id="export-button" class="export-button">バックアップを書き出す(CSV)</button>
+    <button id="import-button" class="export-button">CSVから取り込む</button>
+    <input type="file" id="import-file" accept=".csv,text/csv" hidden>
+
+    <h2>これまでの日記</h2>
+    <div id="entry-list"></div>
+
+    <p class="version">ver 1</p>
+  </div>
+
+  <script src="../shared/github-storage.js?v=1"></script>
+  <script src="../shared/diary-csv.js?v=1"></script>
+  <script src="script.js?v=1"></script>
+</body>
+</html>

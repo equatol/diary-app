@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日記アプリを選ぶ</title>
+  <!-- Content-Security-Policy: このページではプログラムを一切動かさない（同じサイトの日記アプリの合鍵を守るため） -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <style>
+    body {
+      background: linear-gradient(135deg, #dbefff, #ffeef5);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      margin: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .container {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 32px;
+      max-width: 420px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 10px 24px rgba(120, 170, 255, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 28px;
+    }
+
+    .app-link {
+      display: block;
+      text-decoration: none;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      font-size: 17px;
+      font-weight: bold;
+      transition: transform 0.15s;
+    }
+
+    .app-link:last-child {
+      margin-bottom: 0;
+    }
+
+    .app-link:active {
+      transform: scale(0.97);
+    }
+
+    .app-link.blue {
+      background: #eef4ff;
+      color: #5b9bf5;
+      border: 2px solid #b8dcff;
+    }
+
+    .app-link.pink {
+      background: #ffeef5;
+      color: #ff8fab;
+      border: 2px solid #ffc2d1;
+    }
+
+    .app-link .emoji {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>どちらの日記アプリを開きますか？</h1>
+
+    <a class="app-link blue" href="diary-app/index.html">
+      <span class="emoji">📔</span>
+      日記アプリ
+    </a>
+
+    <a class="app-link pink" href="diary-app-cute/index.html">
+      <span class="emoji">🐣</span>
+      かわいい日記アプリ
+    </a>
+  </div>
+</body>
+</html>

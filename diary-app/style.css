@@ -1,0 +1,331 @@
+body {
+  background: linear-gradient(135deg, #dbefff, #e6e9ff);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  background: #fbfdff;
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(120, 170, 255, 0.25);
+}
+
+#menu-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #5b9bf5;
+  font-size: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#menu-button:hover {
+  background: #eef4ff;
+}
+
+.month-menu {
+  display: none;
+  position: absolute;
+  top: 56px;
+  left: 16px;
+  min-width: 140px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(120, 170, 255, 0.3);
+  z-index: 10;
+}
+
+.month-menu.open {
+  display: block;
+}
+
+.month-menu li {
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.month-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.month-menu li:hover {
+  background: #eef4ff;
+}
+
+.month-menu li.active {
+  background: #5b9bf5;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
+
+h1 {
+  color: #5b9bf5;
+  text-align: center;
+  margin-top: 40px;
+}
+
+h2 {
+  color: #7a8ccf;
+  font-size: 18px;
+  margin-top: 32px;
+}
+
+.date-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.date-label {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #b8dcff;
+  border-radius: 14px;
+  padding: 8px 10px;
+  font-size: 15px;
+  color: #3a3a3a;
+  cursor: pointer;
+}
+
+.date-input-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  border: 2px solid #b8dcff;
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #5b9bf5;
+}
+
+button {
+  display: block;
+  margin: 16px auto 0;
+  background: #5b9bf5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 28px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #4285e0;
+}
+
+.day-group {
+  margin-bottom: 16px;
+}
+
+.day-group h3 {
+  color: #5b9bf5;
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #eef4ff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.entry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.entry-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: #b0b0b0;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.delete-button.confirming {
+  background: #ffd6d6;
+  color: #e05a5a;
+}
+
+@media (hover: hover) {
+  .delete-button:hover {
+    background: #ffd6d6;
+    color: #e05a5a;
+  }
+}
+
+#settings-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #5b9bf5;
+  font-size: 26px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#settings-button:hover {
+  background: #eef4ff;
+}
+
+.settings-panel {
+  display: none;
+  background: #eef4ff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.settings-panel.open {
+  display: block;
+}
+
+.settings-panel h2 {
+  margin-top: 0;
+}
+
+.settings-note {
+  font-size: 13px;
+  color: #555;
+  margin-top: 0;
+}
+
+.settings-panel label {
+  display: block;
+  font-size: 13px;
+  color: #7a8ccf;
+  margin-top: 10px;
+}
+
+.settings-panel input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #b8dcff;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 16px; /* 16px 未満だと iPhone で入力時に画面が拡大されてしまう */
+  outline: none;
+}
+
+.settings-panel input:focus {
+  border-color: #5b9bf5;
+}
+
+.sub-button {
+  background: transparent;
+  color: #e05a5a;
+  font-size: 13px;
+}
+
+.sub-button:hover {
+  background: #ffd6d6;
+}
+
+.status-text {
+  min-height: 1.2em;
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #5b9bf5;
+  text-align: center;
+}
+
+.status-text.error {
+  color: #e05a5a;
+}
+
+button:disabled {
+  background: #b8cdef;
+  cursor: wait;
+}
+
+.version {
+  margin: 24px 0 0;
+  font-size: 11px;
+  color: #b0b0b0;
+  text-align: center;
+}
