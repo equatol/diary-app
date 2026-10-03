@@ -18,12 +18,26 @@
     return `${y}/${Number(m)}/${Number(d)}`;
   }
 
-  // 日付の新しい順に並べて CSV の文字列を作る（Excel で文字化けしないよう先頭に BOM を付ける）
+  // 日付ごとに日記の本文を集める。保存データは「新しく書いたものが先頭」なので、
+  // 1日の中は逆順にして「書いた順（古い→新しい）」にそろえる
+  function groupTextsByDate(entries) {
+    const byDate = new Map();
+    entries.forEach((entry) => {
+      if (!byDate.has(entry.date)) byDate.set(entry.date, []);
+      byDate.get(entry.date).push(entry.text);
+    });
+    byDate.forEach((texts) => texts.reverse());
+    return byDate;
+  }
+
+  // 日付の新しい順に、同じ日は1行にまとめて（改行でつなぐ）CSV の文字列を作る
+  // （Excel で文字化けしないよう先頭に BOM を付ける）
   function buildCsv(entries) {
-    const sorted = [...entries].sort((a, b) => (a.date < b.date ? 1 : -1));
+    const byDate = groupTextsByDate(entries);
+    const dates = [...byDate.keys()].sort((a, b) => (a < b ? 1 : -1));
     const rows = [["日付", "内容"]];
-    sorted.forEach((entry) => {
-      rows.push([toSlashDate(entry.date), entry.text]);
+    dates.forEach((date) => {
+      rows.push([toSlashDate(date), byDate.get(date).join("\n")]);
     });
     return "﻿" + rows.map((row) => row.map(escapeCsvField).join(",")).join("\r\n");
   }

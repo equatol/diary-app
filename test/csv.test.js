@@ -59,6 +59,22 @@ test("書き出しは新しい日付順で、日付は 2026/9/1 の形", () => {
   assert.strictEqual(csv, "﻿日付,内容\r\n2026/9/30,新しい\r\n2026/9/1,古い");
 });
 
+test("同じ日の日記は1行にまとまり、書いた順（古い→新しい）に改行でつながる", () => {
+  // 保存データは新しく書いたものが先頭
+  const csv = DiaryCsv.buildCsv([
+    { id: "c", date: "2026-09-30", text: "夜：眠れた" },
+    { id: "b", date: "2026-09-30", text: "昼：散歩, 少し" },
+    { id: "z", date: "2026-09-29", text: "前の日" },
+    { id: "a", date: "2026-09-30", text: "朝：\"だるい\"" },
+  ]);
+  assert.strictEqual(
+    csv,
+    '﻿日付,内容\r\n2026/9/30,"朝：""だるい""\n昼：散歩, 少し\n夜：眠れた"\r\n2026/9/29,前の日'
+  );
+  const { entries } = DiaryCsv.csvToEntries(csv, makeId);
+  assert.strictEqual(entries.length, 2, "1日1行になっていません");
+});
+
 (async () => {
   let failed = 0;
   for (const t of tests) {

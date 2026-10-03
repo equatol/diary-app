@@ -160,6 +160,14 @@
           year,
           (current) => {
             const seen = new Set(current.map((e) => `${e.date}\n${e.text}`));
+            // 同じ日を1行にまとめたCSV（書いた順に改行でつないだもの）も取り込み済みとみなす。
+            // 保存データは新しいものが先頭なので、逆順にしてつなぐ
+            const textsByDate = new Map();
+            current.forEach((e) => {
+              if (!textsByDate.has(e.date)) textsByDate.set(e.date, []);
+              textsByDate.get(e.date).unshift(e.text);
+            });
+            textsByDate.forEach((texts, date) => seen.add(`${date}\n${texts.join("\n")}`));
             const fresh = list.filter((e) => {
               const key = `${e.date}\n${e.text}`;
               if (seen.has(key)) return false;

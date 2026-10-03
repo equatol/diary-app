@@ -227,6 +227,19 @@ test("CSV取り込み：2回取り込んでも重複せず、2回目は書き込
   assert.strictEqual(fake.log.filter((l) => l.startsWith("PUT")).length, putsBefore);
 });
 
+test("CSV取り込み：同じ日を1行にまとめたCSVを取り込み直しても重複しない", async () => {
+  const fake = createFakeGitHub();
+  const storage = makeStorage(fake);
+  // 朝→昼→夜の順に書いた（保存データは新しいものが先頭になる）
+  await storage.addEntry({ id: "1", date: "2026-09-30", text: "朝" });
+  await storage.addEntry({ id: "2", date: "2026-09-30", text: "昼" });
+  await storage.addEntry({ id: "3", date: "2026-09-30", text: "夜" });
+  // 書き出したCSVの1行（書いた順に改行でつないだもの）を取り込む
+  const added = await storage.importEntries([{ id: "x", date: "2026-09-30", text: "朝\n昼\n夜" }]);
+  assert.strictEqual(added, 0);
+  assert.strictEqual(fake.readJson("entries/2026.json").length, 3);
+});
+
 test("CSV取り込み：公開リポジトリには書き込まない", async () => {
   const fake = createFakeGitHub({ isPrivate: false });
   const storage = makeStorage(fake);
